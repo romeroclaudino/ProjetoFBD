@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `PROJETO_FBD`.`CLIENTE` (
   `CEP` VARCHAR(20) NOT NULL,
   `telefone` VARCHAR(20) NOT NULL,
   `percentualDesconto` FLOAT NOT NULL,
-  PRIMARY KEY (`codCliente`, `nome`),
+  PRIMARY KEY (`codCliente`),
   INDEX `fk_CLIENTE_ESTADO_idx` (`codEstado` ASC),
   CONSTRAINT `fk_CLIENTE_ESTADO`
     FOREIGN KEY (`codEstado`)

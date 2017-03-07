@@ -18,9 +18,10 @@ USE `PROJETO_FBD` ;
 -- Table `PROJETO_FBD`.`ESTADO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_FBD`.`ESTADO` (
-  `codEstado` INT NOT NULL,
+  `codEstado` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`codEstado`))
+  PRIMARY KEY (`codEstado`),
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC))
 ENGINE = InnoDB;
 
 
@@ -28,9 +29,10 @@ ENGINE = InnoDB;
 -- Table `PROJETO_FBD`.`UNIDADE_ESTOQUE`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_FBD`.`UNIDADE_ESTOQUE` (
-  `codUnidade` INT NOT NULL,
+  `codUnidade` INT NOT NULL AUTO_INCREMENT,
   `descricao` VARCHAR(200) NOT NULL,
-  PRIMARY KEY (`codUnidade`))
+  PRIMARY KEY (`codUnidade`),
+  UNIQUE INDEX `descricao_UNIQUE` (`descricao` ASC))
 ENGINE = InnoDB;
 
 
@@ -38,7 +40,7 @@ ENGINE = InnoDB;
 -- Table `PROJETO_FBD`.`CLIENTE`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_FBD`.`CLIENTE` (
-  `codCliente` INT NOT NULL,
+  `codCliente` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(80) NOT NULL,
   `endereco` VARCHAR(100) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
@@ -51,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `PROJETO_FBD`.`CLIENTE` (
   CONSTRAINT `fk_CLIENTE_ESTADO`
     FOREIGN KEY (`codEstado`)
     REFERENCES `PROJETO_FBD`.`ESTADO` (`codEstado`)
-    ON DELETE RESTRICT
+    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
@@ -60,7 +62,7 @@ ENGINE = InnoDB;
 -- Table `PROJETO_FBD`.`PRODUTO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_FBD`.`PRODUTO` (
-  `codProduto` INT NOT NULL,
+  `codProduto` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `preco` FLOAT NOT NULL,
   `codUnidade` INT NOT NULL,
@@ -78,7 +80,7 @@ ENGINE = InnoDB;
 -- Table `PROJETO_FBD`.`PEDIDO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_FBD`.`PEDIDO` (
-  `codPedido` INT NOT NULL,
+  `codPedido` INT NOT NULL AUTO_INCREMENT,
   `tipo` VARCHAR(45) NOT NULL,
   `codCliente` INT NOT NULL,
   `dtEntrada` DATE NOT NULL,

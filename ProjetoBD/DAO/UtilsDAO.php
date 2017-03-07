@@ -15,12 +15,16 @@
        return mysqli_fetch_assoc($res);
    }
 
-function recuperarValor($res) {
-    $result = mysqli_fetch_array($res);
+   function recuperarLinha($res){
+        return mysqli_fetch_row($res);
+   }
 
-    if($result) {
-        return $result[0];
+    function recuperarValor($res) {
+        $result = mysqli_fetch_array($res);
+
+        if($result) {
+            return $result[0];
+        }
+
+        return NULL;
     }
-
-    return NULL;
-}

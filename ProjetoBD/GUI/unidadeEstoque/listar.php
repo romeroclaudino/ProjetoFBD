@@ -1,8 +1,7 @@
 <?php
 
 require_once "../../DAO/UnidadeEstoqueDAO.php";
-$codUnidade = $_REQUEST['codUnidade'];
-$descricao = UnidadeEstoqueDAO::getDescricao($codUnidade);
+$unidades = UnidadeEstoqueDAO::getUnidades();
 
 ?>
 
@@ -23,20 +22,25 @@ $descricao = UnidadeEstoqueDAO::getDescricao($codUnidade);
     <style type="text/css">  @media (min-width: 768px) {.navbar-nav {  display: none !important;  }}  </style>
 
     <script>
-        function editar(){
-
-            if(document.myForm.descricao.value != "")
-            {
-                document.myForm.action = "editarUnidade.php";
-                document.myForm.submit();
-            }
-            else
-                swal({
-                    title: "Campo vazio!",
-                    text: "Você deve preencher todos os campos!",
+        function editar(codUnidade){
+            document.hiddenForm.codUnidade.value = codUnidade;
+            document.hiddenForm.action = "editarForm.php";
+            document.hiddenForm.submit();
+        }
+        function remover(codUnidade){
+            swal({
+                    title: "Tem certeza ?",
+                    text: "Você não terá acesso a esse registro novamente!",
                     type: "warning",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Sim, remova-o!",
+                    closeOnConfirm: false
+                },
+                function(){
+                    document.hiddenForm.codUnidade.value = codUnidade;
+                    document.hiddenForm.action = "remover.php";
+                    document.hiddenForm.submit();
                 });
         }
     </script>
@@ -78,26 +82,46 @@ $descricao = UnidadeEstoqueDAO::getDescricao($codUnidade);
                 <li><a href="#">Listar Itens</a></li>
                 <li><a href="#">Listar Pedidos</a></li>
                 <li><a href="#">Listar Produtos</a></li>
-                <li><a href="#">Listar Unidades de Estoque</a></li>
+                <li class="active"><a href="#">Listar Unidades de Estoque</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Editar Unidade</h1>
+            <h1 class="page-header">Unidades de Estoque</h1>
 
-            <form name="myForm" method="post">
-                <div class="form-group">
-                    <label for="descricao">Descrição:</label>
-                    <input type="text" class="form-control" name="descricao" value="<?=$descricao;?>">
+            <a href="cadastrarForm.php" >
+                <button type="button" class="btn btn-default">Cadastrar Nova Unidade</button>
+            </a>
 
-                    <input type="hidden" name="codUnidade" value="<?=$codUnidade?>"/>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-md-8 cabecalho">Descrição</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    while($unidadeTemp = array_shift($unidades)){
+                        ?>
+                        <tr align="center">
+                            <td class="col-md-8"><?=$unidadeTemp->getDescricao()?></td>
+                            <td class="col-md-1"><button class="btn btn-primary" onclick="editar(<?=$unidadeTemp->getCodUnidade();?>);">Editar</button>
+                            <td class="col-md-1"><button class="btn btn-danger" onclick="remover(<?=$unidadeTemp->getCodUnidade();?>);">Remover</button>
+                        </tr>
 
-                <button type="button" class="btn btn-default" onclick="editar();">Salvar</button>
-            </form>
-
+                        <?php
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+
+<form name="hiddenForm" method="post">
+    <input type="hidden" name="codUnidade"/>
+</form>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
@@ -105,4 +129,3 @@ $descricao = UnidadeEstoqueDAO::getDescricao($codUnidade);
 
 </body>
 </html>
-

@@ -1,7 +1,9 @@
 <?php
 
+require_once "../../DAO/ProdutoDAO.php";
 require_once "../../DAO/UnidadeEstoqueDAO.php";
-$unidades = UnidadeEstoqueDAO::getUnidades();
+
+$produtos = ProdutoDAO::getProdutos();
 
 ?>
 
@@ -22,12 +24,12 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
     <style type="text/css">  @media (min-width: 768px) {.navbar-nav {  display: none !important;  }}  </style>
 
     <script>
-        function editar(codUnidade){
-            document.hiddenForm.codUnidade.value = codUnidade;
-            document.hiddenForm.action = "editarUnidadeForm.php";
+        function editar(codProduto){
+            document.hiddenForm.codProduto.value = codProduto;
+            document.hiddenForm.action = "editarForm.php";
             document.hiddenForm.submit();
         }
-        function remover(codUnidade){
+        function remover(codProduto){
             swal({
                     title: "Tem certeza ?",
                     text: "Você não terá acesso a esse registro novamente!",
@@ -38,8 +40,8 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
                     closeOnConfirm: false
                 },
                 function(){
-                    document.hiddenForm.codUnidade.value = codUnidade;
-                    document.hiddenForm.action = "removerUnidade.php";
+                    document.hiddenForm.codProduto.value = codProduto;
+                    document.hiddenForm.action = "remover.php";
                     document.hiddenForm.submit();
                 });
         }
@@ -81,32 +83,38 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
                 <li><a href="../listarEstado.php">Listar Estados</a></li>
                 <li><a href="#">Listar Itens</a></li>
                 <li><a href="#">Listar Pedidos</a></li>
-                <li><a href="#">Listar Produtos</a></li>
-                <li class="active"><a href="#">Listar Unidades de Estoque</a></li>
+                <li class="active"><a href="#">Listar Produtos</a></li>
+                <li><a href="#">Listar Unidades de Estoque</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Unidades de Estoque</h1>
+            <h1 class="page-header">Produtos</h1>
 
-            <a href="cadastrarUnidadeForm.php" >
-                <button type="button" class="btn btn-default">Cadastrar Nova Unidade</button>
+            <a href="cadastrarForm.php" >
+                <button type="button" class="btn btn-default">Cadastrar Novo Produto</button>
             </a>
 
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
-                    <tr>
-                        <th class="col-md-8 cabecalho">Descrição</th>
-                    </tr>
+                        <tr>
+                            <th class="cabecalho">Nome</th>
+                            <th class="cabecalho">Preco</th>
+                            <th class="cabecalho">Unidade</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <?php
-                    while($unidadeTemp = array_shift($unidades)){
+                    while($produtoTemp = array_shift($produtos)){
                         ?>
                         <tr align="center">
-                            <td class="col-md-8"><?=$unidadeTemp->getDescricao()?></td>
-                            <td class="col-md-1"><button class="btn btn-primary" onclick="editar(<?=$unidadeTemp->getCodUnidade();?>);">Editar</button>
-                            <td class="col-md-1"><button class="btn btn-danger" onclick="remover(<?=$unidadeTemp->getCodUnidade();?>);">Remover</button>
+                            <td><?=$produtoTemp->getNome()?></td>
+                            <td><?="R$ ".$produtoTemp->getPreco()?></td>
+
+                            <td><?=UnidadeEstoqueDAO::getDescricao($produtoTemp->getCodUnidade());?></td>
+
+                            <td><button class="btn btn-primary" onclick="editar(<?=$produtoTemp->getCodProduto();?>);">Editar</button>
+                            <td><button class="btn btn-danger" onclick="remover(<?=$produtoTemp->getCodProduto();?>);">Remover</button>
                         </tr>
 
                         <?php
@@ -120,7 +128,7 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
 </div>
 
 <form name="hiddenForm" method="post">
-    <input type="hidden" name="codUnidade"/>
+    <input type="hidden" name="codProduto"/>
 </form>
 
 <script src="../js/jquery.min.js"></script>

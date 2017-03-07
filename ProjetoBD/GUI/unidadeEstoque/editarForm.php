@@ -1,3 +1,11 @@
+<?php
+
+require_once "../../DAO/UnidadeEstoqueDAO.php";
+$codUnidade = $_REQUEST['codUnidade'];
+$descricao = UnidadeEstoqueDAO::getDescricao($codUnidade);
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -15,11 +23,11 @@
     <style type="text/css">  @media (min-width: 768px) {.navbar-nav {  display: none !important;  }}  </style>
 
     <script>
-        function salvar(){
+        function editar(){
 
             if(document.myForm.descricao.value != "")
             {
-                document.myForm.action = "cadastrarUnidade.php";
+                document.myForm.action = "editar.php";
                 document.myForm.submit();
             }
             else
@@ -74,15 +82,17 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Cadastro de Unidades</h1>
+            <h1 class="page-header">Editar Unidade</h1>
 
             <form name="myForm" method="post">
                 <div class="form-group">
                     <label for="descricao">Descrição:</label>
-                    <input type="text" class="form-control" name="descricao">
+                    <input type="text" class="form-control" name="descricao" value="<?=$descricao;?>">
+
+                    <input type="hidden" name="codUnidade" value="<?=$codUnidade?>"/>
                 </div>
 
-                <button type="button" class="btn btn-default" onclick="salvar();">Salvar</button>
+                <button type="button" class="btn btn-default" onclick="editar();">Salvar</button>
             </form>
 
         </div>
@@ -95,3 +105,4 @@
 
 </body>
 </html>
+

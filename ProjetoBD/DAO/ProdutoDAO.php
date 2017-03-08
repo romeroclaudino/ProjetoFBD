@@ -1,6 +1,7 @@
 <?php
 
 require_once "UtilsDAO.php";
+require_once "ItemDAO.php";
 require_once "../../Domain/Produto.php";
 
 class ProdutoDAO{
@@ -34,7 +35,10 @@ class ProdutoDAO{
         $updateQuery = "UPDATE PRODUTO SET nome='$nome', preco='$preco', codUnidade='$codUnidade' 
         WHERE codProduto = '$codProduto'";
 
+        ItemDAO::atualizarPreco($codProduto, $preco);
+
         return executarQuery($updateQuery);
+
     }
 
     public static function getProdutos(){

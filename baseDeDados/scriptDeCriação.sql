@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `PROJETO_FBD`.`ITEM` (
   `codProduto` INT NOT NULL,
   `quantidade` INT NOT NULL,
   `valorUnit` FLOAT NOT NULL,
-  `ValorTotal` FLOAT NOT NULL,
+  `valorTotal` FLOAT NOT NULL,
   PRIMARY KEY (`codPedido`, `codProduto`),
   INDEX `fk_ITEM_PRODUTO_idx` (`codProduto` ASC),
   CONSTRAINT `fk_ITEM_PEDIDO`

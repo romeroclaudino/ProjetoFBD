@@ -1,13 +1,12 @@
 <?php
 
-require_once "../DAO/ClienteDAO.php";
+require_once "../../DAO/ClienteDAO.php";
 $codCliente = $_REQUEST['codCliente'];
 
-echo "<link rel=\"stylesheet\" href=\"css/sweetalert.css\">
-      <script src=\"js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
+echo "<link rel=\"stylesheet\" href=\"../css/sweetalert.css\">
+      <script src=\"../js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
 
-//if(ClienteDAO::remover($codCliente))
-if(ClienteDAO::remover('s'))
+if(ClienteDAO::remover($codCliente))
 {
     echo "<script>
             window.onload =  function (){
@@ -20,7 +19,7 @@ if(ClienteDAO::remover('s'))
                                     closeOnConfirm: true
                                 },
                                 function(){
-                                    window.location.replace('listarCliente.php');
+                                    window.location.replace('listar.php');
                                 });
                             };
           </script>";
@@ -38,7 +37,7 @@ else
                                 closeOnConfirm: true
                             },
                             function(){
-                                window.location.replace('listarCliente.php');
+                                window.location.replace('listar.php');
                             });
                         };
      </script>";

@@ -1,12 +1,20 @@
 <?php
 
-require_once "../DAO/EstadoDAO.php";
+require_once "../../DAO/ClienteDAO.php";
 $nome = $_REQUEST['nome'];
+$endereco = $_REQUEST['endereco'];
+$cidade = $_REQUEST['cidade'];
+$codEstado = $_REQUEST['codEstado'];
+$CEP = $_REQUEST['CEP'];
+$telefone = $_REQUEST['telefone'];
+$percentualDesconto = $_REQUEST['percentualDesconto'];
 
-echo "<link rel=\"stylesheet\" href=\"css/sweetalert.css\">
-    <script src=\"js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
 
-EstadoDAO::inserir($nome); //NOME DEVE SER UNIQUE
+
+echo "<link rel=\"stylesheet\" href=\"../css/sweetalert.css\">
+    <script src=\"../js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
+
+ClienteDAO::inserir($nome, $endereco, $cidade, $codEstado, $CEP, $telefone, $percentualDesconto);
 
 echo "<script>
             window.onload =  function (){
@@ -19,7 +27,7 @@ echo "<script>
                                     closeOnConfirm: true
                                 },
                                 function(){
-                                    window.location.replace('listarEstado.php');
+                                    window.location.replace('listar.php');
                                 });
                             };
           </script>";

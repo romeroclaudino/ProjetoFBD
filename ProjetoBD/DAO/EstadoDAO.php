@@ -1,7 +1,7 @@
 <?php
 
 require_once "UtilsDAO.php";
-require_once "../Domain/Estado.php";
+require_once "../../Domain/Estado.php";
 
 class EstadoDAO{
 

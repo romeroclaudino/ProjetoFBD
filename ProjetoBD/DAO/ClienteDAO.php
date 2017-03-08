@@ -1,7 +1,7 @@
 <?php
 
 require_once "UtilsDAO.php";
-require_once "../Domain/Cliente.php";
+require_once "../../Domain/Cliente.php";
 
 class ClienteDAO{
 
@@ -19,12 +19,12 @@ class ClienteDAO{
         $endereco = $cliente->getEndereco();
         $cidade = $cliente->getCidade();
         $codEstado = $cliente->getCodEstado();
-        $cep = $cliente->getCep();
+        $CEP = $cliente->getCep();
         $telefone = $cliente->getTelefone();
         $percentualDesconto = $cliente->getPercentualDesconto();
 
         $updateQuery = "UPDATE CLIENTE SET nome='$nome', endereco='$endereco', cidade='$cidade', codEstado='$codEstado',
-        cep='$cep', telefone='$telefone', percentualDesconto='$percentualDesconto' WHERE codCliente='$codCliente'";
+        CEP='$CEP', telefone='$telefone', percentualDesconto='$percentualDesconto' WHERE codCliente='$codCliente'";
 
         return executarQuery($updateQuery);
     }

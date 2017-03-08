@@ -1,10 +1,10 @@
 <?php
 
-require_once "../DAO/EstadoDAO.php";
+require_once "../../DAO/EstadoDAO.php";
 $codEstado = $_REQUEST['codEstado'];
 
-echo "<link rel=\"stylesheet\" href=\"css/sweetalert.css\">
-      <script src=\"js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
+echo "<link rel=\"stylesheet\" href=\"../css/sweetalert.css\">
+    <script src=\"../js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
 
 if(EstadoDAO::remover($codEstado))
 {
@@ -19,7 +19,7 @@ if(EstadoDAO::remover($codEstado))
                                     closeOnConfirm: true
                                 },
                                 function(){
-                                    window.location.replace('listarEstado.php');
+                                    window.location.replace('listar.php');
                                 });
                             };
           </script>";
@@ -37,7 +37,7 @@ else
                                 closeOnConfirm: true
                             },
                             function(){
-                                window.location.replace('listarEstado.php');
+                                window.location.replace('listarEslistar.php');
                             });
                         };
      </script>";

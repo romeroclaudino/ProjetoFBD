@@ -1,7 +1,7 @@
 <?php
 
-require_once "../../DAO/UnidadeEstoqueDAO.php";
-$unidades = UnidadeEstoqueDAO::getUnidades();
+require_once "../../DAO/EstadoDAO.php";
+$estados = EstadoDAO::getEstados();
 
 ?>
 
@@ -24,11 +24,9 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
     <script>
         function salvar(){
 
-            var nome = document.myForm.nome.value;
-            var preco = document.myForm.preco.value;
-            var codUnidade = document.myForm.codUnidade.value;
-
-            if((nome != "") && (preco != "") && (codUnidade != ""))
+            if(document.myForm.nome.value != "" && document.myForm.endereco.value != "" && document.myForm.cidade.value != ""
+                && document.myForm.codEstado.value != "" && document.myForm.CEP.value != ""
+                && document.myForm.percentualDesconto.value != "")
             {
                 document.myForm.action = "cadastrar.php";
                 document.myForm.submit();
@@ -41,10 +39,6 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
                     confirmButtonText: "Ok",
                     closeOnConfirm: true
                 });
-        }
-        function isNumberKey(evt){
-            var charCode = (evt.which) ? evt.which : event.keyCode;
-            return !(charCode > 31 && (charCode < 48 || charCode > 57));
         }
     </script>
 
@@ -65,11 +59,11 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../cliente/listar.php">Listar clientes</a></li>
+                <li><a href="listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
                 <li><a href="#">Listar itens</a></li>
                 <li><a href="#">Listar pedidos</a></li>
-                <li><a href="listar.php">Listar produtos</a></li>
+                <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
@@ -80,16 +74,16 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="../cliente/listar.php">Listar clientes</a></li>
+                <li><a href="listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
                 <li><a href="#">Listar itens</a></li>
                 <li><a href="#">Listar pedidos</a></li>
-                <li><a href="listar.php">Listar produtos</a></li>
+                <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Cadastro de Produtos</h1>
+            <h1 class="page-header">Cadastro de clientes</h1>
 
             <form name="myForm" method="post">
                 <div class="form-group">
@@ -97,29 +91,48 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
                     <input type="text" class="form-control" name="nome">
                 </div>
                 <div class="form-group">
-                    <label for="preco">Preço:</label>
-                    <input type="number" min="0" step="0.1" onkeypress="return isNumberKey(event)" class="form-control" name="preco">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" class="form-control" name="endereco">
+                </div>
+                <div class="form-group">
+                    <label for="cidade">Cidade:</label>
+                    <input type="text" class="form-control" name="cidade">
                 </div>
 
                 <div class="form-group">
-                    <label for="codUnidade">Unidade de Estoque:</label>
-                    <select class="form-control" data-live-search="true" name="codUnidade">
-                        <option value="" selected>Selecione</option>
+                <label for="codEstado">Estado:</label>
+                <select class="form-control" data-live-search="true" name="codEstado">
+                    <option value="" selected>Selecione</option>
 
-                        <?php
-                        while($unidadeTemp = array_shift($unidades))
-                            echo "<option value=\"".$unidadeTemp->getCodUnidade()."\">".$unidadeTemp->getDescricao()."</option>";
-                        ?>
+                    <?php
+                    while($estadoTemp = array_shift($estados))
+                        echo "<option value=\"".$estadoTemp->getCodEstado()."\">".$estadoTemp->getNome()."</option>";
+                    ?>
 
-                    </select>
+                </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="CEP">CEP:</label>
+                    <input type="text" class="form-control" name="CEP">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="number" class="form-control" name="telefone">
+                </div>
+
+                <div class="form-group">
+                    <label for="percentualDesconto">Percentual de desconto:</label>
+                    <input type="number" min="0" class="form-control" name="percentualDesconto">
                 </div>
 
                 <button type="button" class="btn btn-default" onclick="salvar();">Salvar</button>
             </form>
 
+            </div>
         </div>
     </div>
-</div>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>

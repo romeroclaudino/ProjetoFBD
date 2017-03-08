@@ -58,12 +58,12 @@ $descricao = UnidadeEstoqueDAO::getDescricao($codUnidade);
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../listarCliente.php">Listar Clientes</a></li>
-                <li><a href="../listarEstado.php">Listar Estados</a></li>
-                <li><a href="#">Listar Itens</a></li>
-                <li><a href="#">Listar Pedidos</a></li>
-                <li><a href="#">Listar Produtos</a></li>
-                <li><a href="#">Listar Unidades de Estoque</a></li>
+                <li><a href="../cliente/listar.php">Listar clientes</a></li>
+                <li><a href="../estado/listar.php">Listar estados</a></li>
+                <li><a href="#">Listar itens</a></li>
+                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../produto/listar.php">Listar produtos</a></li>
+                <li><a href="listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
     </div>
@@ -73,12 +73,12 @@ $descricao = UnidadeEstoqueDAO::getDescricao($codUnidade);
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="../listarCliente.php">Listar Clientes</a></li>
-                <li><a href="../listarEstado.php">Listar Estados</a></li>
-                <li><a href="#">Listar Itens</a></li>
-                <li><a href="#">Listar Pedidos</a></li>
-                <li><a href="#">Listar Produtos</a></li>
-                <li><a href="#">Listar Unidades de Estoque</a></li>
+                <li><a href="../cliente/listar.php">Listar clientes</a></li>
+                <li><a href="../estado/listar.php">Listar estados</a></li>
+                <li><a href="#">Listar itens</a></li>
+                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../produto/listar.php">Listar produtos</a></li>
+                <li><a href="listar.php">Listar enidades de estoque</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">

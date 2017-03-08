@@ -1,6 +1,6 @@
 <?php
 
-require_once "../DAO/EstadoDAO.php";
+require_once "../../DAO/EstadoDAO.php";
 $estados = EstadoDAO::getEstados();
 
 ?>
@@ -15,16 +15,16 @@ $estados = EstadoDAO::getEstados();
 
     <title>Projeto FBD</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/projetofbd.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/sweetalert.css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/projetofbd.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/sweetalert.css">
 
     <style type="text/css">  @media (min-width: 768px) {.navbar-nav {  display: none !important;  }}  </style>
 
     <script>
         function editar(codEstado){
             document.hiddenForm.codEstado.value = codEstado;
-            document.hiddenForm.action = "editarEstadoForm.php";
+            document.hiddenForm.action = "editarForm.php";
             document.hiddenForm.submit();
         }
         function remover(codEstado){
@@ -39,7 +39,7 @@ $estados = EstadoDAO::getEstados();
                 },
                 function(){
                     document.hiddenForm.codEstado.value = codEstado;
-                    document.hiddenForm.action = "removerEstado.php";
+                    document.hiddenForm.action = "remover.php";
                     document.hiddenForm.submit();
                 });
         }
@@ -62,11 +62,12 @@ $estados = EstadoDAO::getEstados();
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="listarCliente.php">Listar clientes</a></li>
+                <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="#">Listar estados</a></li>
-                <li><a href="#">Listar produtos</a></li>
+                <li><a href="#">Listar Itens</a></li>
                 <li><a href="#">Listar pedidos</a></li>
-                <li><a href="#">Listar unidades de estoque</a></li>
+                <li><a href="../produto/listar.php">Listar produtos</a></li>
+                <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
     </div>
@@ -76,17 +77,18 @@ $estados = EstadoDAO::getEstados();
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="listarCliente.php">Listar clientes</a></li>
+                <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li class="active"><a href="#">Listar estados</a></li>
-                <li><a href="#">Listar produtos</a></li>
+                <li><a href="#">Listar itens</a></li>
                 <li><a href="#">Listar pedidos</a></li>
-                <li><a href="#">Listar unidades de estoques</a></li>
+                <li><a href="../produto/listar.php">Listar produtos</a></li>
+                <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Estados</h1>
 
-            <a href="cadastrarEstadoForm.php" >
+            <a href="cadastrarForm.php" >
                 <button type="button" class="btn btn-default">Cadastrar novo estado</button>
             </a>
 
@@ -121,9 +123,9 @@ $estados = EstadoDAO::getEstados();
     <input type="hidden" name="codEstado"/>
 </form>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
 
 </body>
 </html>

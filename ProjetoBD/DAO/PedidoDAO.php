@@ -16,7 +16,7 @@ class PedidoDAO{
         $desconto = $pedido->getDesconto();
 
         $insertQuery = "INSERT INTO PEDIDO (tipo, codCliente, dtEntrada, valorTotal, desconto, dtEmbarque)
-                        VALUES ('$tipo','$codCliente','$dtEntrada',0,$desconto,$dtEmbarque)";
+                        VALUES ('$tipo','$codCliente','$dtEntrada',0,'$desconto','$dtEmbarque')";
 
         return executarQuery($insertQuery);
     }

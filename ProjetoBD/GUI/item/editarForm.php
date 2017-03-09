@@ -39,15 +39,15 @@ $item = ItemDAO::getItem($codPedido, $codProduto);
             var codProdutoNovo = document.myForm.codProdutoNovo.value;
             var quantidadeNova = document.myForm.quantidadeNova.value;
 
-            if((codPedidoNovo != "") && (codProdutoNovo != "") && (quantidadeNova != ""))
+            if((codPedidoNovo != "") && (codProdutoNovo != "") && (quantidadeNova != "") && (quantidadeNova>=1))
             {
                 document.myForm.action = "editar.php";
                 document.myForm.submit();
             }
             else
                 swal({
-                    title: "Campo vazio!",
-                    text: "Você deve preencher todos os campos!",
+                    title: "Valor inválido!",
+                    text: "Você deve preencher os campos corretamente!",
                     type: "warning",
                     confirmButtonText: "Ok",
                     closeOnConfirm: true
@@ -126,7 +126,7 @@ $item = ItemDAO::getItem($codPedido, $codProduto);
 
                 <div class="form-group">
                     <label for="quantidadeNova">Quantidade:</label>
-                    <input type="number" class="form-control" name="quantidadeNova" value="<?=$item->getQuantidade()?>">
+                    <input type="number" min="1" class="form-control" name="quantidadeNova" value="<?=$item->getQuantidade()?>">
                 </div>
 
                 <input type="hidden" name="codPedido" value="<?=$codPedido?>"/>

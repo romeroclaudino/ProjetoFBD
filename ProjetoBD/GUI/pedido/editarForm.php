@@ -41,14 +41,13 @@ $clientes = ClienteDAO::getClientes();
             var desconto = document.myForm.desconto.value;
             var codCliente = document.myForm.codCliente.value;
 
-            if((tipo != "") && (dtEntrada != "") && (dtEmbarque != "") && (desconto != "") && (codCliente != ""))
+            if((tipo != "") && (dtEntrada != "") && (dtEmbarque != "") && (desconto != "") && (codCliente != "") &&
+                desconto >= 0 && desconto <= 100)
             {
-                if(document.myForm.desconto.value > 0 && document.myForm.desconto.value < 100)
-                {
                     document.myForm.action = "editar.php";
                     document.myForm.submit();
-                }
-                else
+            }
+            else
                     swal({
                         title: "Valor inválido!",
                         text: "Você deve preencher os campos corretamente!",
@@ -56,15 +55,6 @@ $clientes = ClienteDAO::getClientes();
                         confirmButtonText: "Ok",
                         closeOnConfirm: true
                     });
-            }
-            else
-                swal({
-                    title: "Campo vazio!",
-                    text: "Você deve preencher todos os campos!",
-                    type: "warning",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true
-                });
         }
     </script>
 

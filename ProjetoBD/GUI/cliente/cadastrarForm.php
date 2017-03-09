@@ -25,15 +25,14 @@ $estados = EstadoDAO::getEstados();
         function salvar(){
 
             if(document.myForm.nome.value != "" && document.myForm.endereco.value != "" && document.myForm.cidade.value != ""
-                && document.myForm.codEstado.value != "" && document.myForm.CEP.value != ""
-                && document.myForm.percentualDesconto.value != "")
+                && document.myForm.codEstado.value != "" && document.myForm.CEP.value != "" && document.myForm.telefone.value != ""
+                && document.myForm.percentualDesconto.value != "" && document.myForm.percentualDesconto.value >= 0 &&
+                document.myForm.percentualDesconto.value <= 100)
             {
-                if(document.myForm.percentualDesconto.value > 0 && document.myForm.percentualDesconto.value < 100)
-                {
                     document.myForm.action = "cadastrar.php";
                     document.myForm.submit();
-                }
-                else
+            }
+            else
                     swal({
                         title: "Valor inválido!",
                         text: "Você deve preencher os campos corretamente!",
@@ -42,15 +41,6 @@ $estados = EstadoDAO::getEstados();
                         closeOnConfirm: true
                     });
             }
-            else
-                swal({
-                    title: "Campo vazio!",
-                    text: "Você deve preencher todos os campos!",
-                    type: "warning",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true
-                });
-        }
     </script>
 
 </head>

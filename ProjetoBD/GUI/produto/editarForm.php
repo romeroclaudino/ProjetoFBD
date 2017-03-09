@@ -39,15 +39,15 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
             var preco = document.myForm.preco.value;
             var codUnidade = document.myForm.codUnidade.value;
 
-            if((nome != "") && (preco != "") && (codUnidade != ""))
+            if((nome != "") && (preco != "") && (codUnidade != "") && (preco >= 0))
             {
                 document.myForm.action = "editar.php";
                 document.myForm.submit();
             }
             else
                 swal({
-                    title: "Campo vazio!",
-                    text: "Você deve preencher todos os campos!",
+                    title: "Valor inválido!",
+                    text: "Você deve preencher os campos corretamente!",
                     type: "warning",
                     confirmButtonText: "Ok",
                     closeOnConfirm: true

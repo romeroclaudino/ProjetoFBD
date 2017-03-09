@@ -122,7 +122,7 @@ $clientes = ClienteDAO::getClientes();
 
                         <td><?=$clienteTemp->getCep();?></td>
                         <td><?=$clienteTemp->getTelefone();?></td>
-                        <td><?=$clienteTemp->getPercentualDesconto();?></td>
+                        <td><?=$clienteTemp->getPercentualDesconto()." %";?></td>
                         <td><button class="btn btn-primary" onclick="editar(<?=$clienteTemp->getCodCliente();?>);">Editar</button>
                         <td><button class="btn btn-danger" onclick="remover(<?=$clienteTemp->getCodCliente();?>);">Remover</button>
                     </tr>

@@ -31,24 +31,21 @@ $pedidos = PedidoDAO::getPedidos();
             var codProduto = document.myForm.codProduto.value;
             var quantidade = document.myForm.quantidade.value;
 
-            if((codPedido != "") && (codProduto != "") && (quantidade != ""))
+            if((codPedido != "") && (codProduto != "") && (quantidade != "") && (quantidade>=1))
             {
                 document.myForm.action = "cadastrar.php";
                 document.myForm.submit();
             }
             else
                 swal({
-                    title: "Campo vazio!",
-                    text: "Você deve preencher todos os campos!",
+                    title: "Valor inválido!",
+                    text: "Você deve preencher os campos corretamente!",
                     type: "warning",
                     confirmButtonText: "Ok",
                     closeOnConfirm: true
                 });
         }
-        function isNumberKey(evt){
-            var charCode = (evt.which) ? evt.which : event.keyCode;
-            return !(charCode > 31 && (charCode < 48 || charCode > 57));
-        }
+
     </script>
 
 </head>
@@ -122,7 +119,7 @@ $pedidos = PedidoDAO::getPedidos();
                 </div>
                 <div class="form-group">
                     <label for="quantidade">Quantidade:</label>
-                    <input type="number" min="0" class="form-control" name="quantidade">
+                    <input type="number" min="1" class="form-control" name="quantidade">
                 </div>
 
                 <button type="button" class="btn btn-default" onclick="salvar();">Salvar</button>

@@ -115,7 +115,7 @@ $pedidos = PedidoDAO::getPedidos();
                             <td><?=$pedidoTemp->getCodCliente()?></td>
                             <td><?=$pedidoTemp->getDtEntrada()?></td>
                             <td><?=$pedidoTemp->getDtEmbarque()?></td>
-                            <td><?=$pedidoTemp->getDesconto()?></td>
+                            <td><?=$pedidoTemp->getDesconto()." %"?></td>
                             <td><?="R$ ".$pedidoTemp->getValorTotal()?></td>
 
 

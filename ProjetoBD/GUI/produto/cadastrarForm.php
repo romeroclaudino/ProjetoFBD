@@ -28,23 +28,19 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
             var preco = document.myForm.preco.value;
             var codUnidade = document.myForm.codUnidade.value;
 
-            if((nome != "") && (preco != "") && (codUnidade != ""))
+            if((nome != "") && (preco != "") && (codUnidade != "") && (preco >= 0))
             {
                 document.myForm.action = "cadastrar.php";
                 document.myForm.submit();
             }
             else
                 swal({
-                    title: "Campo vazio!",
-                    text: "Você deve preencher todos os campos!",
+                    title: "Valor inválido!",
+                    text: "Você deve preencher os campos corretamente!",
                     type: "warning",
                     confirmButtonText: "Ok",
                     closeOnConfirm: true
                 });
-        }
-        function isNumberKey(evt){
-            var charCode = (evt.which) ? evt.which : event.keyCode;
-            return !(charCode > 31 && (charCode < 48 || charCode > 57));
         }
     </script>
 
@@ -98,7 +94,7 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
                 </div>
                 <div class="form-group">
                     <label for="preco">Preço:</label>
-                    <input type="number" min="0" step="0.1" onkeypress="return isNumberKey(event)" class="form-control" name="preco">
+                    <input type="number" step="0.01" class="form-control" name="preco">
                 </div>
 
                 <div class="form-group">

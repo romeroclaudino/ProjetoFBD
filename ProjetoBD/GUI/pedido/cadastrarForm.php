@@ -1,7 +1,7 @@
 <?php
 
-require_once "../../DAO/UnidadeEstoqueDAO.php";
-$unidades = UnidadeEstoqueDAO::getUnidades();
+require_once "../../DAO/ClienteDAO.php";
+$clientes = ClienteDAO::getClientes();
 
 ?>
 
@@ -24,14 +24,27 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
     <script>
         function salvar(){
 
-            var nome = document.myForm.nome.value;
-            var preco = document.myForm.preco.value;
-            var codUnidade = document.myForm.codUnidade.value;
+            var tipo = document.myForm.tipo.value;
+            var dtEntrada = document.myForm.dtEntrada.value;
+            var dtEmbarque = document.myForm.dtEmbarque.value;
+            var desconto = document.myForm.desconto.value;
+            var codCliente = document.myForm.codCliente.value;
 
-            if((nome != "") && (preco != "") && (codUnidade != ""))
+            if((tipo != "") && (dtEntrada != "") && (dtEmbarque != "") && (desconto != "") && (codCliente != ""))
             {
-                document.myForm.action = "cadastrar.php";
-                document.myForm.submit();
+                if(document.myForm.desconto.value > 0 && document.myForm.desconto.value < 100)
+                {
+                    document.myForm.action = "cadastrar.php";
+                    document.myForm.submit();
+                }
+                else
+                    swal({
+                        title: "Valor inválido!",
+                        text: "Você deve preencher os campos corretamente!",
+                        type: "warning",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true
+                    });
             }
             else
                 swal({
@@ -41,10 +54,6 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
                     confirmButtonText: "Ok",
                     closeOnConfirm: true
                 });
-        }
-        function isNumberKey(evt){
-            var charCode = (evt.which) ? evt.which : event.keyCode;
-            return !(charCode > 31 && (charCode < 48 || charCode > 57));
         }
     </script>
 
@@ -68,8 +77,8 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
                 <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
                 <li><a href="../item/listar.php">Listar itens</a></li>
-                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
-                <li><a href="listar.php">Listar produtos</a></li>
+                <li><a href="listar.php">Listar pedidos</a></li>
+                <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
@@ -83,36 +92,47 @@ $unidades = UnidadeEstoqueDAO::getUnidades();
                 <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
                 <li><a href="../item/listar.php">Listar itens</a></li>
-                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
-                <li><a href="listar.php">Listar produtos</a></li>
+                <li><a href="listar.php">Listar pedidos</a></li>
+                <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Cadastro de produtos</h1>
+            <h1 class="page-header">Cadastro de pedidos</h1>
 
             <form name="myForm" method="post">
                 <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" class="form-control" name="nome">
-                </div>
-                <div class="form-group">
-                    <label for="preco">Preço:</label>
-                    <input type="number" min="0" step="0.1" onkeypress="return isNumberKey(event)" class="form-control" name="preco">
+                    <label for="tipo">Tipo:</label>
+                    <input type="text" class="form-control" name="tipo">
                 </div>
 
                 <div class="form-group">
-                    <label for="codUnidade">Unidade de Estoque:</label>
-                    <select class="form-control" data-live-search="true" name="codUnidade">
-                        <option value="" selected>Selecione</option>
+                    <label for="codCliente">Cod. do cliente:</label>
+                    <select class="form-control" data-live-search="true" name="codCliente">
 
                         <?php
-                        while($unidadeTemp = array_shift($unidades))
-                            echo "<option value=\"".$unidadeTemp->getCodUnidade()."\">".$unidadeTemp->getDescricao()."</option>";
+                        while($clienteTemp = array_shift($clientes))
+                            echo "<option value=\"".$clienteTemp->getCodCliente()."\">".$clienteTemp->getCodCliente()."</option>";
                         ?>
 
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="dtEntrada">Data de entrada:</label>
+                    <input type="date"  class="form-control" name="dtEntrada">
+                </div>
+
+                <div class="form-group">
+                    <label for="dtEmbarque">Data de embarque:</label>
+                    <input type="date"  class="form-control" name="dtEmbarque">
+                </div>
+
+                <div class="form-group">
+                    <label for="desconto">Desconto:</label>
+                    <input type="number" min="0" max="100" step="0.1" class="form-control" name="desconto">
+                </div>
+
 
                 <button type="button" class="btn btn-default" onclick="salvar();">Salvar</button>
             </form>

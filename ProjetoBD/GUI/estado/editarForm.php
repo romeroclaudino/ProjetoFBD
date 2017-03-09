@@ -60,8 +60,8 @@ $nome = EstadoDAO::getNome($codEstado);
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="listar.php">Listar estados</a></li>
-                <li><a href="#">Listar itens</a></li>
-                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../item/listar.php">Listar itens</a></li>
+                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
                 <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
@@ -75,8 +75,8 @@ $nome = EstadoDAO::getNome($codEstado);
             <ul class="nav nav-sidebar">
                 <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="listar.php">Listar estados</a></li>
-                <li><a href="#">Listar itens</a></li>
-                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../item/listar.php">Listar itens</a></li>
+                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
                 <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>

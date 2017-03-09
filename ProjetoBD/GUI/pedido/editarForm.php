@@ -1,10 +1,18 @@
 <?php
 
+require_once "../../DAO/PedidoDAO.php";
 require_once "../../DAO/ClienteDAO.php";
-require_once "../../DAO/EstadoDAO.php";
-$codCliente = $_REQUEST['codCliente'];
-$cliente = ClienteDAO::getCliente($codCliente);
-$estados = EstadoDAO::getEstados();
+
+$codPedido = $_REQUEST['codPedido'];
+$pedido = PedidoDAO::getPedido($codPedido);
+
+$tipo = $pedido->getTipo();
+$codCliente = $pedido->getCodCliente();
+$dtEntrada = $pedido->getDtEntrada();
+$dtEmbarque = $pedido->getDtEmbarque();
+$desconto = $pedido->getDesconto();
+
+$clientes = ClienteDAO::getClientes();
 
 ?>
 
@@ -25,13 +33,18 @@ $estados = EstadoDAO::getEstados();
     <style type="text/css">  @media (min-width: 768px) {.navbar-nav {  display: none !important;  }}  </style>
 
     <script>
-        function salvar(){
+        function editar(){
 
-            if(document.myForm.nome.value != "" && document.myForm.endereco.value != "" && document.myForm.cidade.value != ""
-                && document.myForm.codEstado.value != "" && document.myForm.CEP.value != ""
-                && document.myForm.percentualDesconto.value != "")
+            var tipo = document.myForm.tipo.value;
+            var dtEntrada = document.myForm.dtEntrada.value;
+            var dtEmbarque = document.myForm.dtEmbarque.value;
+            var desconto = document.myForm.desconto.value;
+            var codCliente = document.myForm.codCliente.value;
+
+            if((tipo != "") && (dtEntrada != "") && (dtEmbarque != "") && (desconto != "") && (codCliente != ""))
             {
-                if (document.myForm.percentualDesconto.value > 0 && document.myForm.percentualDesconto.value < 100) {
+                if(document.myForm.desconto.value > 0 && document.myForm.desconto.value < 100)
+                {
                     document.myForm.action = "editar.php";
                     document.myForm.submit();
                 }
@@ -72,10 +85,10 @@ $estados = EstadoDAO::getEstados();
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="listar.php">Listar clientes</a></li>
+                <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
                 <li><a href="../item/listar.php">Listar itens</a></li>
-                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
+                <li><a href="listar.php">Listar pedidos</a></li>
                 <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
@@ -87,59 +100,54 @@ $estados = EstadoDAO::getEstados();
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="listar.php">Listar clientes</a></li>
+                <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
                 <li><a href="../item/listar.php">Listar itens</a></li>
-                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
+                <li><a href="listar.php">Listar pedidos</a></li>
                 <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Editar cliente</h1>
+            <h1 class="page-header">Editar pedido</h1>
 
             <form name="myForm" method="post">
                 <div class="form-group">
-                    <label for="nome">Nome:</label>
-                    <input type="text" class="form-control" name="nome" value="<?=$cliente->getNome()?>">
-                </div>
-                <div class="form-group">
-                    <label for="endereco">Endereço:</label>
-                    <input type="text" class="form-control" name="endereco" value="<?=$cliente->getEndereco()?>">
-                </div>
-                <div class="form-group">
-                    <label for="cidade">Cidade:</label>
-                    <input type="text" class="form-control" name="cidade" value="<?=$cliente->getCidade()?>">
+                    <label for="tipo">Tipo:</label>
+                    <input type="text" class="form-control" name="tipo" value="<?=$tipo?>">
                 </div>
 
                 <div class="form-group">
-                <label for="codEstado">Estado:</label>
-                <select class="form-control" data-live-search="true" name="codEstado">
+                    <label for="codCliente">Cod. do cliente:</label>
+                    <select class="form-control" data-live-search="true" name="codCliente">
 
-                    <?php
-                    while($estadoTemp = array_shift($estados))
-                        echo "<option ".(($cliente->getCodEstado() == $estadoTemp->getCodEstado()) ? 'selected' : '')." value=\"".$estadoTemp->getCodEstado()."\">".$estadoTemp->getNome()."</option>";
-                    ?>
+                        <?php
+                        while($clienteTemp = array_shift($clientes))
+                            echo "<option ".(($clienteTemp->getCodCliente() == $codCliente) ? 'selected' : '')." value=\"".$clienteTemp->getCodCliente()."\">".$clienteTemp->getCodCliente()."</option>";
+                        ?>
 
-                </select>
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="dtEntrada">Data de entrada:</label>
+                    <input type="date"  class="form-control" name="dtEntrada" value="<?=$dtEntrada?>">
                 </div>
 
                 <div class="form-group">
-                    <label for="CEP">CEP:</label>
-                    <input type="text" class="form-control" name="CEP"  value="<?=$cliente->getCep()?>">
+                    <label for="dtEmbarque">Data de embarque:</label>
+                    <input type="date"  class="form-control" name="dtEmbarque" value="<?=$dtEmbarque?>">
                 </div>
 
                 <div class="form-group">
-                    <label for="telefone">Telefone:</label>
-                    <input type="number" class="form-control" name="telefone" value="<?=$cliente->getTelefone()?>">
+                    <label for="desconto">Desconto:</label>
+                    <input type="number" min="0" max="100" step="0.1" onkeypress="return isNumberKey(event)" class="form-control" name="desconto" value="<?=$desconto?>">
                 </div>
 
-                <div class="form-group">
-                    <label for="percentualDesconto">Percentual de desconto:</label>
-                    <input type="number" min="0" class="form-control" name="percentualDesconto" value="<?=$cliente->getPercentualDesconto()?>">
-                </div>
-                <input type="hidden" name="codCliente" value="<?=$cliente->getCodCliente()?>"/>
-                <button type="button" class="btn btn-default" onclick="salvar();">Salvar</button>
+                <input type="hidden" name="codPedido" value="<?=$codPedido?>"/>
+
+                <button type="button" class="btn btn-default" onclick="editar();">Salvar</button>
             </form>
 
         </div>

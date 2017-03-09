@@ -1,14 +1,16 @@
 <?php
 
-require_once "../../DAO/EstadoDAO.php";
-$nome = $_REQUEST['nome'];
-
+require_once "../../DAO/ItemDAO.php";
+$codPedido = $_REQUEST['codPedido'];
+$codProduto = $_REQUEST['codProduto'];
+$quantidade = $_REQUEST['quantidade'];
 
 echo "<link rel=\"stylesheet\" href=\"../css/sweetalert.css\">
     <script src=\"../js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
 
-if(EstadoDAO::inserir($nome))
-{
+
+if(ItemDAO::inserir($codPedido, $codProduto, $quantidade)) {
+
     echo "<script>
             window.onload =  function (){
                             swal({
@@ -27,11 +29,11 @@ if(EstadoDAO::inserir($nome))
 }
 else
 {
-        echo "<script>
+    echo "<script>
         window.onload =  function (){
                         swal({
                                 title: \"Ops!\",
-                                text: \"Não foi possível cadastrar o registro, verifique se o estado já existe ou a sua conexão com o banco!\",
+                                text: \"Não foi possível cadastrar o registro, verifique se o item já existe ou a sua conexão com o banco!\",
                                 type: \"error\",
                                 confirmButtonText: \"Ok\",
                                 closeOnConfirm: true

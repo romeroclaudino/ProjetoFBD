@@ -33,7 +33,7 @@ class ItemDAO{
         }else{return false;}
     }
 
-    public static function atualizarItemForm($itemAtual, $itemNovo){
+    public static function atualizar($itemAtual, $itemNovo){
 
         $codPedidoAtual = $itemAtual->getCodPedido();
         $codProdutoAtual = $itemAtual->getCodProduto();
@@ -124,6 +124,22 @@ class ItemDAO{
         }
 
         return $arrayItens;
+    }
+
+    public static function getItem($codPedido, $codProduto){
+
+        $selectQuery = "SELECT * FROM ITEM WHERE codPedido ='$codPedido' AND codProduto='$codProduto' ";
+        $result = executarQuery($selectQuery);
+
+        $linha = recuperarLinha($result);
+
+        $quantidade = $linha[2];
+        $valorUnit = $linha[3];
+        $valorTotal = $linha[4];
+
+        $item = new Item($codPedido, $codProduto, $quantidade, $valorUnit, $valorTotal);
+
+        return $item;
     }
 
     public static function atualizarPreco($codProduto,$novoPreco){

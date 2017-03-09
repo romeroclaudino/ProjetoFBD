@@ -52,8 +52,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
-                <li><a href="#">Listar itens</a></li>
-                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../item/listar.php">Listar itens</a></li>
+                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
                 <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="listar.php">Listar unidades de estoque</a></li>
             </ul>
@@ -67,14 +67,14 @@
             <ul class="nav nav-sidebar">
                 <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
-                <li><a href="#">Listar itens</a></li>
-                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../item/listar.php">Listar itens</a></li>
+                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
                 <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="listar.php">Listar unidades de estoque</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Cadastro de Unidades</h1>
+            <h1 class="page-header">Cadastro de unidades</h1>
 
             <form name="myForm" method="post">
                 <div class="form-group">

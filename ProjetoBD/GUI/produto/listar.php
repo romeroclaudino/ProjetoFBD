@@ -66,8 +66,8 @@ $produtos = ProdutoDAO::getProdutos();
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
-                <li><a href="#">Listar itens</a></li>
-                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../item/listar.php">Listar itens</a></li>
+                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
                 <li><a href="#">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
@@ -81,8 +81,8 @@ $produtos = ProdutoDAO::getProdutos();
             <ul class="nav nav-sidebar">
                 <li><a href="../cliente/listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
-                <li><a href="#">Listar itens</a></li>
-                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../item/listar.php">Listar itens</a></li>
+                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
                 <li class="active"><a href="#">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
@@ -91,7 +91,7 @@ $produtos = ProdutoDAO::getProdutos();
             <h1 class="page-header">Produtos</h1>
 
             <a href="cadastrarForm.php" >
-                <button type="button" class="btn btn-default">Cadastrar Novo Produto</button>
+                <button type="button" class="btn btn-default">Cadastrar novo produto</button>
             </a>
 
             <div class="table-responsive">

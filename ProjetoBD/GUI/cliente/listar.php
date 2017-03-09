@@ -66,7 +66,8 @@ $clientes = ClienteDAO::getClientes();
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Listar clientes</a></li>
             <li><a href="../estado/listar.php">Listar estados</a></li>
-            <li><a href="#">Listar pedidos</a></li>
+            <li><a href="../item/listar.php">Listar itens</a></li>
+            <li><a href="../pedido/listar.php">Listar pedidos</a></li>
             <li><a href="../produto/listar.php">Listar produtos</a></li>
             <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
           </ul>
@@ -79,11 +80,11 @@ $clientes = ClienteDAO::getClientes();
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Listar clientes</a></li>
-            <li><a href="../estado/listar.php">Listar estados</a></li>
-            <li><a href="#">Listar itens</a></li>
-            <li><a href="#">Listar pedidos</a></li>
-            <li><a href="../produto/listar.php">Listar produtos</a></li>
-            <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
+              <li><a href="../estado/listar.php">Listar estados</a></li>
+              <li><a href="../item/listar.php">Listar itens</a></li>
+              <li><a href="../pedido/listar.php">Listar pedidos</a></li>
+              <li><a href="../produto/listar.php">Listar produtos</a></li>
+              <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -97,6 +98,7 @@ $clientes = ClienteDAO::getClientes();
               <table class="table table-striped table-bordered table-hover">
                 <thead>
                   <tr>
+                      <th class="cabecalho">Cod.</th>
                       <th class="cabecalho">Nome</th>
                       <th class="cabecalho">Endereço</th>
                       <th class="cabecalho">Cidade</th>
@@ -111,6 +113,7 @@ $clientes = ClienteDAO::getClientes();
                 while($clienteTemp = array_shift($clientes)){
                     ?>
                     <tr align="center">
+                        <td ><?=$clienteTemp->getCodCliente();?></td>
                         <td ><?=$clienteTemp->getNome();?></td>
                         <td><?=$clienteTemp->getEndereco();?></td>
                         <td><?=$clienteTemp->getCidade();?></td>

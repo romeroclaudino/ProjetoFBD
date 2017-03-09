@@ -28,8 +28,19 @@ $estados = EstadoDAO::getEstados();
                 && document.myForm.codEstado.value != "" && document.myForm.CEP.value != ""
                 && document.myForm.percentualDesconto.value != "")
             {
-                document.myForm.action = "cadastrar.php";
-                document.myForm.submit();
+                if(document.myForm.percentualDesconto.value > 0 && document.myForm.percentualDesconto.value < 100)
+                {
+                    document.myForm.action = "cadastrar.php";
+                    document.myForm.submit();
+                }
+                else
+                    swal({
+                        title: "Valor inválido!",
+                        text: "Você deve preencher os campos corretamente!",
+                        type: "warning",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true
+                    });
             }
             else
                 swal({
@@ -61,8 +72,8 @@ $estados = EstadoDAO::getEstados();
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
-                <li><a href="#">Listar itens</a></li>
-                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../item/listar.php">Listar itens</a></li>
+                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
                 <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
@@ -76,8 +87,8 @@ $estados = EstadoDAO::getEstados();
             <ul class="nav nav-sidebar">
                 <li><a href="listar.php">Listar clientes</a></li>
                 <li><a href="../estado/listar.php">Listar estados</a></li>
-                <li><a href="#">Listar itens</a></li>
-                <li><a href="#">Listar pedidos</a></li>
+                <li><a href="../item/listar.php">Listar itens</a></li>
+                <li><a href="../pedido/listar.php">Listar pedidos</a></li>
                 <li><a href="../produto/listar.php">Listar produtos</a></li>
                 <li><a href="../unidadeEstoque/listar.php">Listar unidades de estoque</a></li>
             </ul>
@@ -124,7 +135,7 @@ $estados = EstadoDAO::getEstados();
 
                 <div class="form-group">
                     <label for="percentualDesconto">Percentual de desconto:</label>
-                    <input type="number" min="0" class="form-control" name="percentualDesconto">
+                    <input type="number" min="0" step="0.1" class="form-control" name="percentualDesconto">
                 </div>
 
                 <button type="button" class="btn btn-default" onclick="salvar();">Salvar</button>

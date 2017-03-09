@@ -119,14 +119,14 @@ class PedidoDAO{
             $valor += $itemTemp->getValorTotal();
         }
 
-        return valor;
+        return $valor;
     }
 
     public static function aplicaDescontoPedido($valor, $pedido){
 
         $desconto = $pedido->getDesconto();
 
-        $valor *= (1 - $desconto/100.0);
+        $valor *= (1.0 - $desconto / 100.0);
 
         return $valor;
     }
@@ -138,9 +138,20 @@ class PedidoDAO{
 
         $desconto = $cliente->getPercentualDesconto();
 
-        $valor *= (1 - $desconto/100.0);
+        $valor *= (1.0 - $desconto / 100.0);
 
         return $valor;
     }
 
+    public static function calculaValorTotalCliente($codCliente){
+        $selectQuery = "SELECT * FROM PEDIDO WHERE codCliente='$codCliente'";
+        $result = executarQuery($selectQuery);
+
+        while($linha = recuperarArray($result)){
+
+            $codPedido = $linha['codPedido'];
+            self::calculaValorTotal($codPedido);
+
+        }
+    }
 }

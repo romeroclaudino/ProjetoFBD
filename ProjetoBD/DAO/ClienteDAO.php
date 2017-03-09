@@ -2,6 +2,7 @@
 
 require_once "UtilsDAO.php";
 require_once "../../Domain/Cliente.php";
+require_once "PedidoDAO.php";
 
 class ClienteDAO{
 
@@ -23,22 +24,22 @@ class ClienteDAO{
         $telefone = $cliente->getTelefone();
         $percentualDesconto = $cliente->getPercentualDesconto();
 
+
+
         $updateQuery = "UPDATE CLIENTE SET nome='$nome', endereco='$endereco', cidade='$cidade', codEstado='$codEstado',
         CEP='$CEP', telefone='$telefone', percentualDesconto='$percentualDesconto' WHERE codCliente='$codCliente'";
 
-        return executarQuery($updateQuery);
+        if(executarQuery($updateQuery)) {
+            PedidoDAO::calculaValorTotalCliente($codCliente);
+            return true;
+        }
+        else
+            return false;
     }
 
     public static function remover($codCliente){
         $removeQuery = "DELETE FROM CLIENTE WHERE codCliente='$codCliente'";
-
-        //Gambiarratz
-        $qtd = mysqli_num_rows(executarQuery("SELECT * FROM CLIENTE"));
-        executarQuery($removeQuery);
-        if(mysqli_num_rows(executarQuery("SELECT * FROM CLIENTE")) !== $qtd)
-            return true;
-        else
-            return false;
+        return executarQuery($removeQuery);
     }
 
     public static function getClientes(){

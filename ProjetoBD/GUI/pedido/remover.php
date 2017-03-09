@@ -1,19 +1,18 @@
 <?php
 
-require_once "../../DAO/EstadoDAO.php";
-$nome = $_REQUEST['nome'];
-
+require_once "../../DAO/PedidoDAO.php";
+$codPedido = $_REQUEST['codPedido'];
 
 echo "<link rel=\"stylesheet\" href=\"../css/sweetalert.css\">
-    <script src=\"../js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
+      <script src=\"../js/sweetalert.min.js\" type=\"text/javascript\" charset=\"utf-8\"></script>";
 
-if(EstadoDAO::inserir($nome))
+if(PedidoDAO::remover($codPedido))
 {
     echo "<script>
             window.onload =  function (){
                             swal({
-                                    title: \"Cadastrado!\",
-                                    text: \"Registro cadastrado com sucesso!\",
+                                    title: \"Removido!\",
+                                    text: \"Registro removido com sucesso!\",
                                     type: \"success\",
                                     showCancelButton: false,
                                     confirmButtonText: \"Ok\",
@@ -27,18 +26,20 @@ if(EstadoDAO::inserir($nome))
 }
 else
 {
-        echo "<script>
+    echo "<script>
         window.onload =  function (){
                         swal({
                                 title: \"Ops!\",
-                                text: \"Não foi possível cadastrar o registro, verifique se o estado já existe ou a sua conexão com o banco!\",
+                                text: \"Não foi possível remover o registro, verifique sua conexão com o banco!\",
                                 type: \"error\",
+                                showCancelButton: false,
                                 confirmButtonText: \"Ok\",
                                 closeOnConfirm: true
                             },
                             function(){
-                               window.location.replace('listar.php');                           
+                                window.location.replace('listar.php');
                             });
                         };
      </script>";
 }
+

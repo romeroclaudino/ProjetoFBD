@@ -1,7 +1,7 @@
 <?php
     $host = "localhost:3306";
     $user = "root";
-    $pass = "";
+    $pass = "root";
     $database = "PROJETO_FBD";
     $link = mysqli_connect($host, $user, $pass, $database);
     mysqli_set_charset($link,'utf8');

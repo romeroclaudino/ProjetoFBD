@@ -71,7 +71,7 @@ $clientes = ClienteDAO::getClientes();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Projeto FBD</a>
+            <a class="navbar-brand" href="../../index.php">Projeto FBD</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">

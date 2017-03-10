@@ -60,7 +60,7 @@ $produtos = ProdutoDAO::getProdutos();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Projeto FBD</a>
+            <a class="navbar-brand" href="../../index.php">Projeto FBD</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -98,6 +98,7 @@ $produtos = ProdutoDAO::getProdutos();
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>
+                            <th class="cabecalho">Cod.</th>
                             <th class="cabecalho">Nome</th>
                             <th class="cabecalho">Preco</th>
                             <th class="cabecalho">Unidade</th>
@@ -108,6 +109,7 @@ $produtos = ProdutoDAO::getProdutos();
                     while($produtoTemp = array_shift($produtos)){
                         ?>
                         <tr align="center">
+                            <td><?=$produtoTemp->getCodProduto()?></td>
                             <td><?=$produtoTemp->getNome()?></td>
                             <td><?="R$ ".$produtoTemp->getPreco()?></td>
 
